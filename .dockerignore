@@ -1,0 +1,11 @@
+.babelrc
+.cache/
+.dockerignore
+.git
+.gitignore
+Dockerfile
+client/
+docker-compose.yml
+nginx/
+node_modules/
+server/

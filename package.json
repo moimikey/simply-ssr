@@ -1,0 +1,58 @@
+{
+  "name": "simply-ssr",
+  "version": "1.0.0",
+  "description": "🔭 a simply scalable web boilerplate: docker, nginx/node, parcel + ssr",
+  "scripts": {
+    "clean": "rimraf ./dist",
+    "dev": "parcel serve client/index.html",
+    "build": "npm-run-all -s clean build:*",
+    "build:client": "cross-env BABEL_ENV=client parcel build client/index.html -d dist/client --public-url /",
+    "build:server": "cross-env BABEL_ENV=server parcel build server/index.js -d dist/server --public-url / --target=node8",
+    "start:docker": "docker-compose build && docker-compose up --force-recreate --abort-on-container-exit",
+    "start": "npm-run-all -s build start:docker",
+    "start:server": "node ./server/index.js",
+    "lint": "standard ./client/*.js ./server/*.js"
+  },
+  "keywords": [
+    "boilerplate",
+    "docker",
+    "react",
+    "ssr",
+    "parcel"
+  ],
+  "author": "Michael Scott Hertzberg <mshertzberg@gmail.com>",
+  "license": "WTFPL",
+  "standard": {
+    "parser": "babel-eslint",
+    "plugins": [
+      "react"
+    ],
+    "env": [
+      "es6",
+      "shared-node-browser"
+    ]
+  },
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "cheerio": "^1.0.0-rc.2",
+    "compression": "^1.7.2",
+    "cross-env": "^5.2.0",
+    "express": "^4.16.3",
+    "nodemon": "^1.17.5",
+    "npm-run-all": "^4.1.3",
+    "npx": "^10.2.0",
+    "parcel": "^1.9.4",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-helmet": "^5.2.0",
+    "react-router-dom": "^4.3.1",
+    "rimraf": "^2.6.2"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.5",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "eslint": "^5.0.1",
+    "standard": "^11.0.1"
+  }
+}
