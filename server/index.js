@@ -1,15 +1,38 @@
-import compression from 'compression'
-import express from 'express'
-import middleware from './middleware'
+import cluster from 'cluster'
+import logger from './helpers/logger'
+import { SERVER_PORT as PORT } from './helpers/port'
+import useCluster from './helpers/cluster'
 
-const app = express()
-const port = process.env.PORT || 1234
+if (useCluster) {
+  if (cluster.isMaster) {
+    logger.info(`Running cluster's master. Number of CPUs: ${useCluster}`)
+    forkWorkers(useCluster)
+  } else {
+    startWorker()
+  }
+} else {
+  logger.info('Running without cluster.')
+  startWorker()
+}
 
-app.use(compression())
+function startWorker () {
+  const server = require('./server').default
+  server.listen(PORT)
+}
 
-app.use('/dist', express.static(`${__dirname}/../client`))
-app.get('/*', middleware)
+function forkWorkers (numberOfCpus) {
+  for (let i = 0; i < numberOfCpus; i++) {
+    let worker = cluster.fork()
+    logger.info(`Forked new worker: ${worker.id}`)
 
-app.listen(port, () => {
-  console.log(`listening on port ${port}`)
-})
+    worker.on('exit', function onWorkedExited (code, signal) {
+      if (signal) {
+        logger.error(`Worker was killed by signal: ${signal}`)
+      } else if (code !== 0) {
+        logger.error(`Worker exited with error code: ${code}`)
+      } else {
+        logger.info('Worker success!')
+      }
+    })
+  }
+}

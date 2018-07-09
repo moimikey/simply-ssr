@@ -4,8 +4,6 @@ import * as ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
 import App from './modules/App'
 
-console.log('Hello world.')
-
 const element = document.getElementById('app')
 const app = (
   <BrowserRouter>
@@ -13,7 +11,7 @@ const app = (
   </BrowserRouter>
 )
 
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV !== 'debug') {
   ReactDOM.hydrate(app, element)
 } else {
   ReactDOM.render(app, element)

@@ -1,0 +1,47 @@
+{
+  "caching": {
+    "memory": {
+      "max": 100,
+      "ttl": 60
+    }
+  },
+  "cluster": "auto",
+  "compression": {
+    "precompressedAssets": {
+      "brotli": true,
+      "gzip": true
+    },
+    "threshold": "1kb"
+  },
+  "csp": {
+    "reportUri": "https://report-uri.io/report/expresssecuritytest"
+  },
+  "domain": "localhost",
+  "expectCT": {
+    "maxAge": "1 day",
+    "reportUri": "https://report-uri.io/report/expresssecuritytest"
+  },
+  "hpkp": {
+    "maxAge": "90 days",
+    "reportUri": "https://report-uri.io/report/expresssecuritytest",
+    "sha256s": [
+      "ENbaVbZki8BGBCq0jIUE8SJqvBnWf6CL8hkf4GYsg0A=",
+      "E+nXO/0USWdc+uY6Q9iK9lfS99qFMgwk30N4vRV2XHI="
+    ]
+  },
+  "hsts": {
+    "maxAge": "90 days"
+  },
+  "session": {
+    "cookieName": "session",
+    "expiration": "20m",
+    "path": "/",
+    "redis": {
+      "host": "127.0.0.1",
+      "port": 6379,
+      "db": 0,
+      "prefix": "express-security-session-"
+    }
+  },
+  "secret": "MIIJJwIBAAKCAgEAhx3FBCfHxst8ZQTiY6GchXTespuC5b/93+P6p6/q4fEMs9oW5raUVPh0nDtY7Y/Ig"
+}
