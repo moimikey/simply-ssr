@@ -9,11 +9,11 @@
     "copy:views": "cp -r server/views dist/server/views",
     "dev": "parcel serve client/index.html",
     "build": "npm-run-all -s clean build:* copy:*",
-    "build:client": "cross-env BABEL_ENV=client parcel build client/index.html -d dist/client --public-url /assets",
-    "build:server": "cross-env BABEL_ENV=server parcel build server/index.js -d dist/server --public-url /assets --target=node8",
-    "start:docker": "docker-compose build && docker-compose up --force-recreate --abort-on-container-exit",
+    "build:client": "cross-env BABEL_ENV=client parcel build client/index.html -d dist/client --public-url / --target browser --cache-dir dist/client/.cache --experimental-scope-hoisting --detailed-report --log-level 3",
+    "build:server": "cross-env BABEL_ENV=server parcel build server/index.js -d dist/server --public-url / --target node --cache-dir dist/server/.cache --detailed-report --log-level 3",
+    "start:docker": "docker-compose build && docker-compose up --remove-orphans --force-recreate --abort-on-container-exit",
     "start": "npm-run-all -s build start:docker",
-    "start:server": "nodemon ./server/index.js",
+    "start:server": "cross-env PORT=8000 nodemon ./server/index.js",
     "lint": "standard ./client/**/*.js ./server/**/*.js"
   },
   "keywords": [
@@ -36,7 +36,6 @@
     ]
   },
   "dependencies": {
-    "@babel/cli": "^7.0.0-beta.54",
     "body-parser": "^1.18.3",
     "cache-manager": "^2.9.0",
     "cache-manager-redis": "^0.6.0",
@@ -59,9 +58,6 @@
     "ms": "^2.1.1",
     "node-uuid": "^1.4.8",
     "nodemon": "^1.18.3",
-    "npm-run-all": "^4.1.3",
-    "npx": "^10.2.0",
-    "parcel": "^1.9.7",
     "pug": "^2.0.3",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
@@ -75,12 +71,11 @@
     "winston-debug": "^1.1.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0-beta.54",
-    "@babel/preset-env": "^7.0.0-beta.54",
-    "@babel/preset-react": "^7.0.0-beta.54",
-    "@babel/preset-stage-0": "^7.0.0-beta.54",
     "babel-eslint": "^8.2.6",
     "eslint": "^5.1.0",
-    "standard": "^11.0.1"
+    "standard": "^11.0.1",
+    "npm-run-all": "^4.1.3",
+    "npx": "^10.2.0",
+    "parcel": "^1.9.7"
   }
 }

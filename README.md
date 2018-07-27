@@ -28,7 +28,7 @@ serves a secure, production-ready express server with Docker
 ```sh
 npm run start
 
-# go to http://localhost:8000
+# go to https://localhost:8000
 ```
 
 ## Client Architecture
@@ -36,8 +36,6 @@ npm run start
 Client-facing application is a universally rendering `react` application, featuring `react-helmet`, `react-router` and `react-router-dom`, which can be replaced. Client-side code is processed and bundled by `parcel`.
 
 ## Server Architecture
-
-There is a choice between the default `server`, featuring the below optimizations, or `server.simple`, a simple, insecure express server.
 
 ### Security
 
