@@ -5,8 +5,3 @@ services:
     restart: always
     ports:
       - "8000:80"
-    links:
-      - redis
-  redis:
-    image: redis
-    restart: always

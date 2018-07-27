@@ -2,9 +2,19 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
+import io from 'socket.io-client'
 import App from './modules/App'
 
+const socket = io.connect('/')
+
+socket.on('connect', function onWSConnected () {
+  console.log('Connected to ws server.')
+})
+
+socket.emit('hello world!')
+
 const element = document.getElementById('app')
+
 const app = (
   <BrowserRouter>
     <App />

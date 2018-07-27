@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Helmet } from 'react-helmet'
 
-export default function Home () {
+function Home () {
   return (
     <div>
       <Helmet>
@@ -11,3 +11,5 @@ export default function Home () {
     </div>
   )
 }
+
+export default Home

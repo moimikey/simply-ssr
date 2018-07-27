@@ -1,38 +1,41 @@
-import cluster from 'cluster'
-import logger from './helpers/logger'
-import { SERVER_PORT as PORT } from './helpers/port'
-import useCluster from './helpers/cluster'
+const server = require('./server').default
+const port = process.env.PORT || 8000
 
-if (useCluster) {
-  if (cluster.isMaster) {
-    logger.info(`Running cluster's master. Number of CPUs: ${useCluster}`)
-    forkWorkers(useCluster)
-  } else {
-    startWorker()
+function onError (error) {
+  if (error.syscall !== 'listen') {
+    throw error
   }
-} else {
-  logger.info('Running without cluster.')
-  startWorker()
-}
 
-function startWorker () {
-  const server = require('./server').default
-  server.listen(PORT)
-}
+  let addr = server.address()
+  let bind = typeof addr === 'string'
+    ? `Pipe ${addr}`
+    : `Port ${addr.port}`
 
-function forkWorkers (numberOfCpus) {
-  for (let i = 0; i < numberOfCpus; i++) {
-    let worker = cluster.fork()
-    logger.info(`Forked new worker: ${worker.id}`)
-
-    worker.on('exit', function onWorkedExited (code, signal) {
-      if (signal) {
-        logger.error(`Worker was killed by signal: ${signal}`)
-      } else if (code !== 0) {
-        logger.error(`Worker exited with error code: ${code}`)
-      } else {
-        logger.info('Worker success!')
-      }
-    })
+  switch (error.code) {
+    case 'EACCES':
+      console.error(`${bind} requires elevated privileges.`)
+      return process.exit(1)
+    case 'EADDRINUSE':
+      console.error(`${bind} is already in use.`)
+      return process.exit(1)
+    default:
+      throw error
   }
 }
+
+function onListening () {
+  const addr = server.address()
+  const bind = typeof addr === 'string'
+    ? `pipe ${addr}`
+    : `port ${addr.port}`
+  console.info(`Listening on ${bind}.`)
+}
+
+server.on('error', onError)
+server.on('listening', onListening)
+
+process.on('unhandledRejection', (reason, p) => {
+  console.error('Unhandled Rejection at:', p, 'reason:', reason)
+})
+
+server.listen(port)

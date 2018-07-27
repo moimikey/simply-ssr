@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import Home from './Home'
 
-export default function App () {
+function App () {
   return (
     <div>
       <Helmet defaultTitle='Welcome'>
@@ -16,3 +16,5 @@ export default function App () {
     </div>
   )
 }
+
+export default App

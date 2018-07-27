@@ -6,10 +6,12 @@ import { Helmet } from 'react-helmet'
 const templatePath = path.resolve('client/index.html')
 const HTML_TEMPLATE = fs.readFileSync(templatePath).toString()
 
-export default function generateHtml (markup) {
+function generateHtml (markup) {
   const helmet = Helmet.renderStatic()
   const $template = cheerio.load(HTML_TEMPLATE)
   $template('head').append(helmet.title.toString() + helmet.meta.toString() + helmet.link.toString())
   $template('#app').html(markup)
   return $template.html()
 }
+
+export default generateHtml
