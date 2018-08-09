@@ -22,14 +22,16 @@ import { IS_DEBUG } from './helpers/config'
 const PUBLIC_FOLDER = path.join(__dirname, '../client')
 let app = express()
 
-// view engine setup
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'pug')
+
 // global variables
 app.locals.dayjs = dayjs
 app.locals.moment = dayjs
+
 // favicon
 // app.use(favicon(path.join(PUBLIC_FOLDER, 'favicon.ico')))
+
 // logger
 app.use(logger)
 // gzip, brotli compression pre-compressed-assets
@@ -58,11 +60,12 @@ app.use(csrf)
 app.use(viewLocals)
 // routes
 app.use('/', routes)
+
 // catch CSRF and authorization errors
 app.use(error403)
 // catch 404 and forward to error handler
 app.use(error404)
-// error handlers
+// catch 500 errors
 if (IS_DEBUG) {
   app.use(error500dev)
 } else {
