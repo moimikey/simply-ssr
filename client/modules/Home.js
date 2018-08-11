@@ -1,5 +1,9 @@
 import * as React from 'react'
 import { Helmet } from 'react-helmet'
+// import CreateComposer from 'render-prop-composer'
+
+// const composer = CreateComposer(React.createElement, React.Fragment)
+// const Composed = composer(ContainerOne, ContainerTwo)
 
 function Home () {
   return (
