@@ -1,7 +1,7 @@
 
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
-import { BrowserRouter } from 'react-router-dom'
+import { Router } from '@reach/router'
 import io from 'socket.io-client'
 import App from './modules/App'
 
@@ -16,9 +16,9 @@ socket.emit('hello world!')
 const element = document.getElementById('app')
 
 const app = (
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
+  <Router>
+    <App path='/' default />
+  </Router>
 )
 
 if (process.env.NODE_ENV !== 'debug') {

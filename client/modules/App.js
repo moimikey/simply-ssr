@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Helmet } from 'react-helmet'
-import { Switch, Route, Redirect } from 'react-router-dom'
+import { Router } from '@reach/router'
 import Home from './Home'
 
 function App () {
@@ -9,10 +9,9 @@ function App () {
       <Helmet defaultTitle='Welcome'>
         <meta charSet='utf-8' />
       </Helmet>
-      <Switch>
-        <Route exact path='/' component={Home} />
-        <Redirect to='/' />
-      </Switch>
+      <Router>
+        <Home path='/' />
+      </Router>
     </div>
   )
 }

@@ -1,4 +1,4 @@
-const server = require('./server').default
+const server = require('./server')
 const port = process.env.PORT || 8000
 
 function onError (error) {
