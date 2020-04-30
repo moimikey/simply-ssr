@@ -14,7 +14,9 @@
     "start:docker": "docker-compose build && docker-compose up --remove-orphans --force-recreate --abort-on-container-exit",
     "start": "npm-run-all -s build start:docker",
     "start:server": "cross-env nodemon ./server/index.js",
-    "lint": "standard ./client/**/*.js ./server/**/*.js"
+    "lint": "standard ./client/**/*.js ./server/**/*.js",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "keywords": [
     "boilerplate",
@@ -70,7 +72,8 @@
     "static-asset": "^0.6.0",
     "url": "^0.11.0",
     "winston": "^3.0.0",
-    "winston-debug": "^1.1.0"
+    "winston-debug": "^1.1.0",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.6",
@@ -82,5 +85,6 @@
     "npx": "^10.2.0",
     "parcel": "^1.9.7",
     "standard": "^11.0.1"
-  }
+  },
+  "snyk": true
 }
