@@ -61,7 +61,7 @@
     "pug": "^2.0.3",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
-    "react-error-boundary": "^1.2.3",
+    "react-error-boundary": "^2.2.1",
     "react-helmet": "^5.2.0",
     "react-router-dom": "^4.3.1",
     "render-prop-composer": "^1.1.0",
