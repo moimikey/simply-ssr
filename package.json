@@ -48,7 +48,7 @@
     "csurf": "^1.9.0",
     "dayjs": "^1.7.4",
     "express": "^4.16.3",
-    "express-session": "^1.15.6",
+    "express-session": "^1.17.1",
     "extend": "^3.0.2",
     "find": "^0.2.9",
     "helmet": "^3.21.1",
