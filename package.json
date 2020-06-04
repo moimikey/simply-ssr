@@ -41,7 +41,7 @@
     "cache-manager-redis": "^0.6.0",
     "cheerio": "^1.0.0-rc.2",
     "cluster": "^0.7.7",
-    "compression": "^1.7.3",
+    "compression": "^1.7.4",
     "connect-redis": "^3.3.3",
     "cookie-parser": "^1.4.3",
     "cross-env": "^5.2.0",
